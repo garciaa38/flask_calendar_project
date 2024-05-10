@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css')}}">
+    <title>Calendar This</title>
+</head>
+<body>
+    <h1>Calendar Working</h1>
+    <form action="" method="post">
+        <div>{{ form.hidden_tag() }}</div>
+        <div>Name: {{ form.name }}</div>
+        <div>Start: {{ form.start_date }} {{ form.start_time }}</div>
+        <div>End: {{ form.end_date }} {{ form.end_time }}</div>
+        <div>Description: {{ form.description }}</div>
+        <div>Private? {{ form.private }}</div>
+        <div>{{ form.submit }}</div>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ datetime.strptime(row.2, '%Y-%m-%d %H:%M:%S').strftime('%H:%M') }}</td>
+                    <td>{{ datetime.strptime(row.3, '%Y-%m-%d %H:%M:%S').strftime('%H:%M') }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
